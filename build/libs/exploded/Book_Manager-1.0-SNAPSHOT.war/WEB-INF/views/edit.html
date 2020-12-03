@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<h1>Edit Book</h1>
+<p>
+    <a href="/books">Back to the list Books</a>
+</p>
+<div th:if="${message}" style="color: green">
+    <p th:text="${message}"></p>
+</div>
+<form th:action="@{/edit-book}" th:object="${book}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td> Name</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td> Author</td>
+            <td><input type="text" th:field="*{author}"></td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select name="category">
+                    <option th:each="c:${category}" th:value="${c.id}" th:selected="(${c.id}==*{category.id})" th:text="${c.cateName}" ></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update Book"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
